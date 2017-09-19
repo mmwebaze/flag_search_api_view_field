@@ -1,0 +1,68 @@
+<?php
+
+/**
+ * @file
+ * Contains flag_search_api_view_field.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function flag_search_api_view_field_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the flag_search_api_view_field module.
+    case 'help.page.flag_search_api_view_field':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Provides a views field for search api results.') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function flag_search_api_view_field_theme() {
+  return [
+    'flag_search_api_view_field' => [
+      'render element' => 'children',
+    ],
+  ];
+}
+
+/**
+ * Implements hook_views_data_alter().
+ */
+function community_notifier_views_data_alter(array &$data) {
+  $data['search_api_index_aidsfree_index']['flag_url'] = array(
+    'title' => t('Example field'),
+    'help' => t('Some example content that references a user'),
+
+    'field' => array(
+      'id' => 'community_notifier_flag_type_flagger',
+    ),
+  );
+
+  /* $data['search_api_index_aidsfree_index']['flagging'] = array(
+     'title' => t('Flagging'),
+     'help' => t('More information about the relationship'),
+
+     'relationship' => array(
+       //'group' => 'Flag',
+       // Views name of the table being joined to from foo.
+       'base' => 'flagging',
+       // Database field name in example_table for the join.
+       'base field' => 'entity_id',
+       // Real database field name in foo for the join, to override
+       // 'unique_dummy_name'.
+       'field' => 'nid',
+       // ID of relationship handler plugin to use.
+       'id' => 'custom_relationship',
+       //'label' => t('Default label for relationship'),
+     ),
+   );*/
+}
