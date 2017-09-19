@@ -14,7 +14,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *
  * @ingroup views_field_handlers
  *
- * @ViewsField("community_notifier_flag_type_flagger")
+ * @ViewsField("flag_search_api_view_field_plugin")
  */
 class FlagTypeFlagger extends FlagViewsLinkField  {
   protected $flag_service;
