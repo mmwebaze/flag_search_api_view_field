@@ -13,7 +13,7 @@ use Drupal\views\Views;
  *
  * @ingroup views_relationship_handlers
  *
- * @ViewsRelationship("custom_relationship")
+ * @ViewsRelationship("flag_search_api_view_relationship_plugin")
  */
 class CustomRelationship extends FlagViewsRelationship  {
 

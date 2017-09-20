@@ -24,9 +24,15 @@ class FlagTypeFlagger extends FlagViewsLinkField  {
     $this->flag_service = $flag_service;
   }
 
+
   protected function defineOptions() {
     $options = parent::defineOptions();
     $options['flag_type'] = array('default' => 'flag');
+    /*$options['relationship'] = array('default' => 'flag_search_api_view_relationship_plugin');*/
+    if (isset($options['relationship'])){
+      unset($options['relationship']);
+    }
+
     return $options;
   }
   public function buildOptionsForm(&$form, FormStateInterface $form_state) {

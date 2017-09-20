@@ -37,7 +37,7 @@ function flag_search_api_view_field_theme() {
 /**
  * Implements hook_views_data_alter().
  */
-function community_notifier_views_data_alter(array &$data) {
+function flag_search_api_view_field_views_data_alter(array &$data) {
   $data['search_api_index_aidsfree_index']['flag_url'] = array(
     'title' => t('Example field'),
     'help' => t('Some example content that references a user'),
@@ -46,7 +46,27 @@ function community_notifier_views_data_alter(array &$data) {
       'id' => 'flag_search_api_view_field_plugin',
     ),
   );
+  /*$data['search_api_index_aidsfree_index']['rtrtr'] = [
+    'title' => t('retete'),
+    'help' => t('Limit results to only those entity flagged by a certain flag; Or display information about the flag set on a entity.'),
+    'relationship' => [
+      'group' => t('Flag'),
+      'label' => t('Flags'),
+      'base' => 'flagging',
+      'base field' => 'entity_id',
+      'relationship field' => 'id',
+      'id' => 'flag_search_api_view_relationship_plugin',
+    ],
+  ];*/
+  /*$data['search_api_index_aidsfree_index']['flagging'] = array(
+    'title' => t('Flagging'),
+    'help' => t('More information about the relationship'),
+    'relationship' => array(
+      'field' => 'nid',
+      'id' => 'flag_search_api_view_relationship_plugin',
+    ),
 
+  );*/
   /* $data['search_api_index_aidsfree_index']['flagging'] = array(
      'title' => t('Flagging'),
      'help' => t('More information about the relationship'),
