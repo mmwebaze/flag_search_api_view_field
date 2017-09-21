@@ -16,7 +16,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *
  * @ViewsField("flag_search_api_view_field_plugin")
  */
-class FlagTypeFlagger extends FlagViewsLinkField  {
+class FlagViewsFlaggerField extends FlagViewsLinkField  {
   protected $flag_service;
 
   public function __construct(array $configuration, $plugin_id, $plugin_definition, FlagServiceInterface $flag_service) {
