@@ -28,7 +28,6 @@ class FlagViewsFlaggerField extends FlagViewsLinkField  {
   protected function defineOptions() {
     $options = parent::defineOptions();
     $options['flag_type'] = array('default' => 'flag');
-    /*$options['relationship'] = array('default' => 'flag_search_api_view_relationship_plugin');*/
     if (isset($options['relationship'])){
       unset($options['relationship']);
     }
@@ -57,39 +56,28 @@ class FlagViewsFlaggerField extends FlagViewsLinkField  {
     $ids = $storage->getQuery()->condition('nid', explode("/", $values->search_api_url[0])[2], '=')->execute();
     $node = $storage->loadMultiple($ids);
     $entity = current($node);
-    //$entity = $this->getParentRelationshipEntity($values);
+
     return $this->renderLink($entity, $values);
   }
   /**
    * {@inheritdoc}
    */
-  public function renderLink(EntityInterface $entity, ResultRow $values) {
+  protected function renderLink(EntityInterface $entity, ResultRow $values) {
+    // Output nothing as there is no flag.
+    // For an 'empty text' option use the default 'No results behavior'
+    // option provided by Views.
     if (empty($entity)) {
       return '';
     }
 
     $flag = $this->flag_service->getFlagById($this->options['flag_type']);
+
     $link_type_plugin = $flag->getLinkTypePlugin();
 
-    $link = $link_type_plugin->getAsLink($flag, $entity);
+    return $link_type_plugin->getAsFlagLink($flag, $entity);
 
-    $renderable = $link->toRenderable();
-
-    if ($link_type_plugin instanceof FormEntryInterface) {
-      // Check if form should be in a modal or dialog.
-      $configuration = $link_type_plugin->getConfiguration();
-      if ($configuration['form_behavior'] !== 'default') {
-        $renderable['#attached']['library'][] = 'core/drupal.ajax';
-        $renderable['#attributes']['class'][] = 'use-ajax';
-        $renderable['#attributes']['data-dialog-type'] = $configuration['form_behavior'];
-        $renderable['#attributes']['data-dialog-options'] = Json::encode([
-          'width' => 'auto',
-        ]);
-      }
-    }
-
-    return $renderable;
   }
+
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
     return new static(
       $configuration,
