@@ -38,9 +38,9 @@ function flag_search_api_view_field_theme() {
  * Implements hook_views_data_alter().
  */
 function flag_search_api_view_field_views_data_alter(array &$data) {
-  $data['search_api_index_aidsfree_index']['flag_url'] = array(
-    'title' => t('Example field'),
-    'help' => t('Some example content that references a user'),
+  $data['search_api_index_fpntc_site_index']['flag_url'] = array(
+    'title' => t('Flag link (Search API Index)'),
+    'help' => t('Creates a flag link on a Search API index'),
 
     'field' => array(
       'id' => 'flag_search_api_view_field_plugin',
